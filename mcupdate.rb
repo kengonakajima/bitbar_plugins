@@ -14,6 +14,8 @@ sec = (svt * 3.6).to_i
 totalmin = (sec/60).to_i
 min = totalmin%60
 hour = (totalmin/60).to_i
+hour += 6
+hour -= 24 if hour > 24
 
 num = hash["currentcount"].to_i
 
