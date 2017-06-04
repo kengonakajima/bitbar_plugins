@@ -23,6 +23,6 @@ members=[]
 hash["players"].each do |player|
   members.push( player["name"] + " " + player["x"].to_i.to_s + "," + player["y"].to_i.to_s )
 end  
-printf( "%02d:%02d(%d)\n" + members.join("\n"), hour,min,num)
+printf( "%02d:%02d(%d)\n---\n" + members.join("\n"), hour,min,num)
 
 
