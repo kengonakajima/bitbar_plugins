@@ -19,9 +19,10 @@ hour -= 24 if hour > 24
 
 num = hash["currentcount"].to_i
 
-printf( "%02d:%02d(%d)", hour,min,num)
-
-
-
+members=[]
+hash["players"].each do |player|
+  members.push( player["name"] + " " + player["x"].to_i.to_s + "," + player["y"].to_i.to_s )
+end  
+printf( "%02d:%02d(%d)\n" + members.join("\n"), hour,min,num)
 
 
