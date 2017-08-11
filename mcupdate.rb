@@ -5,7 +5,7 @@ require "pp"
 
 #print "TT :shit:\n"
 
-json=`curl -s http://150.95.140.179:8123/up/world/world/1496438497135`
+json=`curl -s http://139.162.118.45.179:8123/up/world/world/1496438497135`
 
 hash=JSON.parse(json)
 
