@@ -31,7 +31,10 @@ json = `curl --silent -H 'X-Api-Key: #{apikey}' https://mackerel.io/api/v0/hosts
 h = JSON.parse(json) 
 rootdisk_used = h["host"]["meta"]["filesystem"]["/dev/root"]["percent_used"]
 
+hjout=`curl -s http://139.162.118.45:3000/stats`
+hjh=JSON.parse(hjout)
+hjnum=hjh["clients"]
 
-printf( "%02d:%02d(%d)\n#{rootdisk_used}\n---\n" + members.join("\n"), hour,min,num)
+printf( "hj#{hjnum} %02d:%02d(%d)\n#{rootdisk_used}\n---\n" + members.join("\n"), hour,min,num)
 
 
