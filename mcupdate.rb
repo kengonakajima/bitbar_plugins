@@ -5,23 +5,24 @@ require "pp"
 
 #print "TT :shit:\n"
 
-json=`curl -s http://139.162.118.45:8123/up/world/world/1496438497135`
-
-hash=JSON.parse(json)
-
-svt = hash["servertime"].to_i
-sec = (svt * 3.6).to_i
-totalmin = (sec/60).to_i
-min = totalmin%60
-hour = (totalmin/60).to_i
-hour += 6
-hour -= 24 if hour > 24
-
-num = hash["currentcount"].to_i
-
-members=[]
-hash["players"].each do |player|
-  members.push( player["name"] + " " + player["x"].to_i.to_s + "," + player["y"].to_i.to_s + "," + player["z"].to_i.to_s )
+begin
+  json=`curl -s http://139.162.118.45:8123/up/world/world/1496438497135`
+  hash=JSON.parse(json)
+  svt = hash["servertime"].to_i
+  sec = (svt * 3.6).to_i
+  totalmin = (sec/60).to_i
+  min = totalmin%60
+  hour = (totalmin/60).to_i
+  hour += 6
+  hour -= 24 if hour > 24
+  num = hash["currentcount"].to_i
+  members=[]
+  hash["players"].each do |player|
+    members.push( player["name"] + " " + player["x"].to_i.to_s + "," + player["y"].to_i.to_s + "," + player["z"].to_i.to_s )
+  end
+rescue
+  min=hour=num=0
+  members=[]
 end
 
 # mackerel disk
@@ -31,7 +32,7 @@ json = `curl --silent -H 'X-Api-Key: #{apikey}' https://mackerel.io/api/v0/hosts
 h = JSON.parse(json) 
 rootdisk_used = h["host"]["meta"]["filesystem"]["/dev/root"]["percent_used"]
 
-hjout=`curl -s http://139.162.118.45:3000/stats`
+hjout=`curl -s https://hajimarium-server.test-tube.net/stats`
 hjh=JSON.parse(hjout)
 hjnum=hjh["clients"]
 
